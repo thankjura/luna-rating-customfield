@@ -1,0 +1,15 @@
+.rating-customfield {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+
+  > * {
+    padding: 0 2px;
+  }
+
+  &.rating-customfield-edit {
+    .star {
+      cursor: pointer;
+    }
+  }
+}

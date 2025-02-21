@@ -1,0 +1,30 @@
+{
+  "key": "${project.groupId}.${project.artifactId}",
+  "name": "${project.name}",
+  "version": "${project.version}",
+  "description": "${project.description}",
+  "vendor": {
+    "name": "${project.organization.name}",
+    "url": "${project.organization.url}"
+  },
+  "components": [
+    {
+      "key": "RatingCustomFieldType",
+      "name": "Test customfield type",
+      "className": "ru.slie.luna.plugins.field.RatingCustomFieldType",
+      "resources": [
+        {
+          "path": "/rating-customfield/RatingFieldView.js",
+          "name": "RatingFieldView"
+        },
+        {
+          "path": "/rating-customfield/RatingFieldEdit.js",
+          "name": "RatingFieldEdit"
+        },
+        {
+          "path": "/rating-customfield/style.css"
+        }
+      ]
+    }
+  ]
+}
