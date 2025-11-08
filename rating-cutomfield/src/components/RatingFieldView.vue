@@ -1,23 +1,24 @@
-<script lang="ts">
-import type { PropType } from "vue";
+<script setup lang="ts">
+import { computed, type PropType } from "vue";
 import type { Option } from "../interfaces.ts";
 
-export default {
+defineOptions({
   name: "RatingFieldView",
-  props: {
-    value: Object as PropType<Option>,
-    field: Object as PropType<{ options: Array<Option> }>
-  },
-  computed: {
-    starIndex() {
-      if (this.field?.options && this.value) {
-        return this.field.options.findIndex((o: Option) => o.id == this.value?.id);
-      }
+})
 
-      return -1;
-    }
-  },
-}
+const props = defineProps({
+  value: Object as PropType<Option>,
+  field: Object as PropType<{ options: Array<Option> }>
+})
+
+const starIndex = computed(() => {
+  if (props.field?.options && props.value) {
+    return props.field.options.findIndex((o: Option) => o.id == props.value?.id);
+  }
+
+  return -1;
+});
+
 </script>
 
 <template>
@@ -27,5 +28,5 @@ export default {
 </template>
 
 <style lang="scss">
-  @import "@/accets/rating.scss";
+  @use "@/accets/rating.scss" as *;
 </style>

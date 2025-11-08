@@ -27,6 +27,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style>
-  @import "accets/style.css";
+<style lang="scss">
+  @use "@/accets/rating.scss" as *;
+  @import "@/accets/style.css";
 </style>
