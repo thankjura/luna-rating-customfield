@@ -22,7 +22,7 @@
           "name": "RatingFieldEdit"
         },
         {
-          "path": "/rating-customfield/style.css"
+          "path": "/rating-customfield/rating-customfield.css"
         }
       ]
     }

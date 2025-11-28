@@ -1,34 +1,24 @@
-import { openBlock as i, createElementBlock as n, Fragment as c, renderList as u, normalizeClass as f } from "vue";
-import { _ as m } from "./_plugin-vue_export-helper-CHgC5LLL.js";
-const p = {
+import { defineComponent as s, computed as d, createElementBlock as n, openBlock as i, Fragment as c, renderList as u, normalizeClass as m } from "vue";
+const f = ["title"], g = /* @__PURE__ */ s({
   name: "RatingFieldView",
+  __name: "RatingFieldView",
   props: {
     value: Object,
     field: Object
   },
-  computed: {
-    starIndex() {
-      var t;
-      return (t = this.field) != null && t.options && this.value ? this.field.options.findIndex((r) => {
-        var e;
-        return r.id == ((e = this.value) == null ? void 0 : e.id);
-      }) : -1;
-    }
+  setup(t) {
+    const e = t, a = d(() => e.field?.options && e.value ? e.field.options.findIndex((l) => l.id == e.value?.id) : -1);
+    return (l, p) => (i(), n("div", {
+      class: "rating-customfield",
+      title: t.value?.name
+    }, [
+      (i(!0), n(c, null, u(t.field?.options, (o, r) => (i(), n("div", {
+        class: m(["star", [r <= a.value ? "icon-star-full" : "icon-star-empty"]]),
+        key: o.id
+      }, null, 2))), 128))
+    ], 8, f));
   }
-}, _ = ["title"];
-function h(t, r, e, v, x, l) {
-  var s, a;
-  return i(), n("div", {
-    class: "rating-customfield",
-    title: (s = e.value) == null ? void 0 : s.name
-  }, [
-    (i(!0), n(c, null, u((a = e.field) == null ? void 0 : a.options, (o, d) => (i(), n("div", {
-      class: f(["star", [d <= l.starIndex ? "icon-star-full" : "icon-star-empty"]]),
-      key: o.id
-    }, null, 2))), 128))
-  ], 8, _);
-}
-const F = /* @__PURE__ */ m(p, [["render", h]]);
+});
 export {
-  F as default
+  g as default
 };

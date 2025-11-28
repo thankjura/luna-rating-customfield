@@ -4,13 +4,11 @@ import org.bson.BsonObjectId;
 import org.bson.BsonValue;
 import org.bson.types.ObjectId;
 import ru.slie.luna.exception.ValidateException;
-import ru.slie.luna.exception.ValueParseException;
 import ru.slie.luna.issue.IssueContext;
 import ru.slie.luna.issue.field.IssueField;
 import ru.slie.luna.issue.field.annotations.IssueFieldTypeComponent;
 import ru.slie.luna.issue.field.options.Option;
 import ru.slie.luna.issue.field.options.OptionsManager;
-import ru.slie.luna.issue.field.sorter.FieldSorter;
 import ru.slie.luna.issue.field.type.AbstractFieldType;
 import ru.slie.luna.locale.I18nResolver;
 
@@ -71,7 +69,7 @@ public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
     }
 
     @Override
-    public Option parseJson(IssueField field, IssueContext context, Object jsonValue) throws ValueParseException {
+    public Option parseJson(IssueField field, IssueContext context, Object jsonValue) {
         if (jsonValue instanceof String) {
             if (ObjectId.isValid((String) jsonValue)) {
                 return optionsManager.getOptionById(field, (String) jsonValue);
@@ -113,11 +111,6 @@ public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
     }
 
     @Override
-    public FieldSorter getSorter(IssueField field) {
-        return null;
-    }
-
-    @Override
     public String getOptionsComponent() {
         return "FieldContextOptions";
     }
@@ -127,5 +120,10 @@ public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
         if (value != null && !(value instanceof Option)) {
             exception.addError(field.getId(), i18n.getText("app.field_type.single_select.bad_value"));
         }
+    }
+
+    @Override
+    public List<String> getSupportedFieldSercherKey() {
+        return List.of("ru.slie.luna.issue.field.searcher.impl.OptionsSearcher");
     }
 }

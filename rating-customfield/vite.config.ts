@@ -27,7 +27,6 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
         },
-
       },
     },
     outDir: resolve(__dirname, '../src/main/resources/rating-customfield')
