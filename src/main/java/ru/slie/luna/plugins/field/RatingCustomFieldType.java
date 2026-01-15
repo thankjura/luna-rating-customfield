@@ -123,7 +123,7 @@ public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
     }
 
     @Override
-    public List<String> getSupportedFieldSercherKey() {
+    public List<String> getSupportedFieldSearcherKey() {
         return List.of("ru.slie.luna.issue.field.searcher.impl.OptionsSearcher");
     }
 }
