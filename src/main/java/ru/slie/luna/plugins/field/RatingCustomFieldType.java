@@ -81,9 +81,11 @@ public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
                 }
             }
         }
-        if (jsonValue instanceof Map<?,?>) {
-            if (((Map<?, ?>) jsonValue).containsKey("id")) {
-                return optionsManager.getOptionById(field, ((Map<?, ?>) jsonValue).get("id").toString());
+        if (jsonValue instanceof Map<?,?> jsonMap) {
+            if (jsonMap.containsKey("id")) {
+                return optionsManager.getOptionById(field, jsonMap.get("id").toString());
+            } else if (jsonMap.containsKey("name")) {
+                return optionsManager.getOptionByName(field.getContext(context), jsonMap.get("name").toString());
             }
             // TODO: set by name
         }

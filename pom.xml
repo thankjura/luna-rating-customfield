@@ -5,24 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.slie.luna</groupId>
     <artifactId>rating-customfield</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <name>Rating customfield plugin</name>
     <description>Provide rating customfield type</description>
     <organization>
-        <name>Oboz Yury</name>
+        <name>Yury Oboz</name>
         <url>mailto:me@slie.ru</url>
     </organization>
 
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>ru.slie.luna</groupId>
             <artifactId>luna-api</artifactId>
-            <version>1.0.0</version>
+            <version>${luna.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -40,4 +35,11 @@
             </resource>
         </resources>
     </build>
+
+    <properties>
+        <luna.version>1.0.0</luna.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>
