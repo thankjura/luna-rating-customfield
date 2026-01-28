@@ -1,12 +1,10 @@
 {
-  "name": "rating-customfield",
+  "name": "frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --build && vite build",
-    "preview": "vite preview"
+    "build": "vue-tsc --build && vite build"
   },
   "dependencies": {
     "vue": "^3.5.24"
@@ -17,6 +15,7 @@
     "sass": "^1.85.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.2",
-    "vue-tsc": "^3.1.0"
+    "vue-tsc": "^3.1.0",
+    "vite-plugin-externals": "^0.6.2"
   }
 }

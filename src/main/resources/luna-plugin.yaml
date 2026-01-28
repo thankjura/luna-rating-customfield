@@ -14,11 +14,11 @@ components:
     className: ru.slie.luna.plugins.field.RatingCustomFieldType
     resources:
       - key:  RatingFieldView
-        path: /rating-customfield/RatingFieldView.js
+        path: frontend/RatingFieldView.js
         type: comp
       - key:  RatingFieldEdit
-        path: /rating-customfield/RatingFieldEdit.js
+        path: frontend/RatingFieldEdit.js
         type: comp
       - key:  rating-customfield-styles
-        path: /rating-customfield/rating-customfield.css
+        path: frontend/frontend.css
         type: css

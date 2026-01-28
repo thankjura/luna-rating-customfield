@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, PropType, ref } from "vue";
-import type { Option } from "@/interfaces.ts";
+import type { Option } from "luna";
 
 defineOptions({
   name: "RatingFieldEdit",
