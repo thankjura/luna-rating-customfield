@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.slie.luna</groupId>
     <artifactId>rating-customfield</artifactId>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
     <name>Rating customfield plugin</name>
     <description>Provide rating customfield type</description>
     <organization>
@@ -78,7 +78,7 @@
     </build>
 
     <properties>
-        <luna.version>1.0.0</luna.version>
+        <luna.version>2.0.0-SNAPSHOT</luna.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

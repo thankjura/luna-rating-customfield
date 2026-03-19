@@ -1,6 +1,7 @@
 ### Backend ###
 target/
 .mvn/
+src/main/resources/frontend
 
 ### Frontend ###
 frontend/*.tsbuildinfo

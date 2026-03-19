@@ -67,6 +67,9 @@ const unHoverOpt = () => {
   @use "@/accets/rating.scss" as *;
 
   .rating-customfield.rating-customfield-edit {
+    min-height: var(--input-height);
+    padding-bottom: 5px;
+
     .icon-cancel-circle:hover {
       color: red;
       cursor: pointer;

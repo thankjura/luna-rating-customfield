@@ -1,16 +1,20 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-import { viteExternalsPlugin } from "vite-plugin-externals";
+import pluginExternal from "vite-plugin-external";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [
-    viteExternalsPlugin({
-      'luna': '__LUNA_COMPONENTS__',
-      'vue': 'Vue',
-      'axios': 'axios',
-      'I18N': 'I18N'
+    pluginExternal({
+      externals: {
+        'luna': '__LUNA_COMPONENTS__',
+        'vue': 'Vue',
+        //'axios': 'axios',
+        'I18N': 'I18N',
+        //'sortablejs': 'Sortable',
+      }
     }),
     vue()
   ],
@@ -20,23 +24,22 @@ export default defineConfig({
     }
   },
   build: {
+    sourcemap: true,
+    minify: 'terser',
     lib: {
       entry: [
-          resolve(__dirname, 'src/components/RatingFieldView.vue'),
-          resolve(__dirname, 'src/components/RatingFieldEdit.vue')],
+        resolve(__dirname, 'src/components/RatingFieldView.vue'),
+        resolve(__dirname, 'src/components/RatingFieldEdit.vue'),
+      ],
       formats: ['es'],
     },
-    rollupOptions: {
-      external: ['vue', 'axios'],
+    rolldownOptions: {
       output: {
         entryFileNames: '[name].js',
         exports: 'named',
-        globals: {
-          vue: 'Vue',
-          axios: 'axios'
-        },
       },
     },
     outDir: resolve(__dirname, '../src/main/resources/frontend'),
+    emptyOutDir: true,
   },
 })

@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/thankjura/luna-schemas/refs/heads/master/luna-plugin.schema.json?ver=2
+# yaml-language-server: $schema=https://raw.githubusercontent.com/thankjura/luna-schemas/refs/heads/master/luna-plugin.schema.json?ver=7
 
 key: ${project.groupId}.${project.artifactId}
 name: ${project.name}
@@ -8,17 +8,20 @@ vendor:
   name: ${project.organization.name}
   url: ${project.organization.url}
 
-components:
+fieldTypes:
   - key: RatingCustomFieldType
     name: Test customfield type
     className: ru.slie.luna.plugins.field.RatingCustomFieldType
+    iconPath: images/rating.png
+    viewComponents:
+      - path: frontend/RatingFieldView.js
+    editComponents:
+      - path: frontend/RatingFieldEdit.js
+    navigatorComponents:
+      - path: frontend/RatingFieldView.js
+    optionsComponent:
+        name: FieldContextOptions
     resources:
-      - key:  RatingFieldView
-        path: frontend/RatingFieldView.js
-        type: comp
-      - key:  RatingFieldEdit
-        path: frontend/RatingFieldEdit.js
-        type: comp
-      - key:  rating-customfield-styles
+      - key: ratingCss
         path: frontend/frontend.css
         type: css
