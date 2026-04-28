@@ -1,12 +1,8 @@
 package ru.slie.luna.plugins.field;
 
-import org.bson.BsonObjectId;
-import org.bson.BsonValue;
-import org.bson.types.ObjectId;
 import ru.slie.luna.exception.ValidateException;
 import ru.slie.luna.issue.IssueContext;
 import ru.slie.luna.issue.field.IssueField;
-import ru.slie.luna.issue.field.annotations.IssueFieldTypeComponent;
 import ru.slie.luna.issue.field.options.Option;
 import ru.slie.luna.issue.field.options.OptionsManager;
 import ru.slie.luna.issue.field.type.AbstractFieldType;
@@ -15,7 +11,6 @@ import ru.slie.luna.locale.I18nResolver;
 import java.util.List;
 import java.util.Map;
 
-@IssueFieldTypeComponent
 public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
     private final OptionsManager optionsManager;
     private final I18nResolver i18n;
@@ -32,62 +27,49 @@ public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
     }
 
     @Override
-    public String getIconPath() {
-        return "/ru.slie.luna.rating-customfield/images/rating.png";
-    }
-
-    @Override
-    public List<String> getViewComponents() {
-        return List.of("RatingFieldView");
-    }
-
-    @Override
-    public List<String> getEditComponents() {
-        return List.of("RatingFieldEdit");
-    }
-
-    @Override
-    public Option getValueFromDB(IssueField field, BsonValue dbValue) {
-        if (dbValue == null) {
-            return null;
-        }
-
-        if (dbValue.isObjectId()) {
-            ObjectId id = dbValue.asObjectId().getValue();
-            return optionsManager.getOptionById(field, id.toString());
+    public Option getValueFromDB(IssueField field, Object dbValue) {
+        if (dbValue instanceof Number) {
+            return optionsManager.getOptionById(field, ((Number) dbValue).longValue());
         }
 
         return null;
     }
 
+    private boolean isNumber(Object value) {
+        if (value instanceof Number) {
+            return true;
+        } else if (value instanceof String s) {
+            try {
+                Integer.parseInt(s);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
     @Override
-    public BsonValue getValueForDB(IssueField field, Option value) {
+    public Object getValueForDB(IssueField field, Option value) {
         if (value == null) {
             return null;
         }
-        return new BsonObjectId(new ObjectId(value.getId()));
+        return value.getId();
     }
 
     @Override
     public Option parseJson(IssueField field, IssueContext context, Object jsonValue) {
-        if (jsonValue instanceof String) {
-            if (ObjectId.isValid((String) jsonValue)) {
-                return optionsManager.getOptionById(field, (String) jsonValue);
-            } else {
-                if (context != null) {
-                    return optionsManager.getOptionByName(field.getContext(context), (String) jsonValue);
-                } else {
-                    return null;
-                }
-            }
-        }
-        if (jsonValue instanceof Map<?,?> jsonMap) {
-            if (jsonMap.containsKey("id")) {
-                return optionsManager.getOptionById(field, jsonMap.get("id").toString());
+        if (jsonValue instanceof Number) {
+            return optionsManager.getOptionById(field, ((Number) jsonValue).longValue());
+        } else if (jsonValue instanceof String &&  context != null) {
+            return optionsManager.getOptionByName(field.getContext(context), (String) jsonValue);
+        } else if (jsonValue instanceof Map<?,?> jsonMap) {
+            if (isNumber(jsonMap.get("id"))) {
+                return optionsManager.getOptionById(field, Long.parseLong(jsonMap.get("id").toString()));
             } else if (jsonMap.containsKey("name")) {
                 return optionsManager.getOptionByName(field.getContext(context), jsonMap.get("name").toString());
             }
-            // TODO: set by name
         }
 
         return null;
@@ -110,11 +92,6 @@ public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
             return null;
         }
         return value.getName();
-    }
-
-    @Override
-    public String getOptionsComponent() {
-        return "FieldContextOptions";
     }
 
     @Override

@@ -7,16 +7,16 @@ defineOptions({
 })
 
 const props = defineProps({
-  field: Object as PropType<{options: Array<Option>}>,
+  field: Object as PropType<{options: Array<Option<number>>}>,
 })
 
-const value = defineModel<Option>();
-const active = ref<Option>(null);
+const value = defineModel<Option<number>>();
+const active = ref<Option<number>>(null);
 
 
 const currentIndex = computed(() => {
   if (props.field?.options && value.value) {
-    return props.field.options.findIndex((o: Option) => o.id == value.value?.id);
+    return props.field.options.findIndex((o: Option<number>) => o.id == value.value?.id);
   }
 
   return -1;
@@ -24,7 +24,7 @@ const currentIndex = computed(() => {
 
 const activeIndex = computed(() => {
   if (props.field?.options && active.value) {
-    return props.field.options.findIndex((o: Option) => o.id == active.value?.id);
+    return props.field.options.findIndex((o: Option<number>) => o.id == active.value?.id);
   }
 
   return -1;
@@ -41,11 +41,11 @@ const displayIndex = computed(() => {
   return -1;
 });
 
-const hoverOpt = (opt: Option) => {
+const hoverOpt = (opt: Option<number>) => {
   active.value = opt;
 }
 
-const setValue = (opt: Option) => {
+const setValue = (opt: Option<number>) => {
   value.value = opt;
 }
 

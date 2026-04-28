@@ -10,7 +10,7 @@ vendor:
 
 fieldTypes:
   - key: RatingCustomFieldType
-    name: Test customfield type
+    name: Rating customfield type
     className: ru.slie.luna.plugins.field.RatingCustomFieldType
     iconPath: images/rating.png
     viewComponents:

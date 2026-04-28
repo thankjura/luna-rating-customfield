@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.slie.luna</groupId>
     <artifactId>rating-customfield</artifactId>
-    <version>1.0.11</version>
+    <version>1.1.0</version>
     <name>Rating customfield plugin</name>
     <description>Provide rating customfield type</description>
     <organization>
@@ -19,12 +19,6 @@
             <groupId>ru.slie.luna</groupId>
             <artifactId>luna-api</artifactId>
             <version>${luna.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>bson</artifactId>
-            <version>4.11.4</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -78,7 +72,7 @@
     </build>
 
     <properties>
-        <luna.version>2.0.0-SNAPSHOT</luna.version>
+        <luna.version>3.0.0-SNAPSHOT</luna.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
