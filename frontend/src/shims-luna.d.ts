@@ -1,108 +1,106 @@
-// Luna exposes version: 3.0.0-SNAPSHOT
+// Luna exposes version: 4.0.0-SNAPSHOT
 declare module 'luna' {
-  import type { DefineComponent, AllowedComponentProps, ComponentCustomProps, VNodeProps } from 'vue'
-  import RouteLocationRaw from 'vue-router'
+  import type { DefineComponent, SlotsType, InjectionKey, Ref } from 'vue';
+  import type RouteLocationRaw from 'vue-router';
 
   export const BusyIconComponent: DefineComponent<
-    {}, {}, {}, {}, {}, {}, {}, {}>
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, SlotsType<{}>>;
   export const ButtonBusy: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
+      type?: "button" | "submit" | "reset"
       busy?: boolean
       disabled?: boolean
-    }, {}, {}, {}, {}, {}, {}, {}> & { $slots: {
-      'default'(props: {}): any
-    }
-  };
+    }, {}, {}, SlotsType<{
+      default: any,
+    }>>;
   export const LoadOverlayComponent: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       absolute?: boolean
       dim?: boolean
-    }, {}, {}, {}, {}, {}, {}, {}>
+    }, {}, {}, SlotsType<{}>>;
   export const PagePaginator: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'setPage': [_page: number]
+    }, {}, {
       busy?: boolean
       compact?: boolean
       page?: number
       maxItems?: number
       limit?: number
       total: number
-    }, {}, {}, {}, {}, {}, {}, {
-      'setPage': [_page: number]
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const PopoverComponent: DefineComponent<
-    {
-      closeButton?: boolean
-      prefferedAlign?: ALIGN[]
-      group?: string
-    }, {
+    {},{
       toggle: (event: MouseEvent, target?: HTMLElement) => void
-    
       show: (event: MouseEvent, target?: HTMLElement) => void
-    
       hide: () => void
-    
       active: boolean
     }, {}, {}, {}, {}, {}, {
       'hide': []
-    }> & { $slots: {
-      'default'(props: {}): any
-    }
-  };
+    }, {}, {
+      closeButton?: boolean
+      prefferedAlign?: ALIGN[]
+      group?: string
+    }, {}, {}, SlotsType<{
+      default: any,
+    }>>;
   export const StatusComponent: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       name?: string
       category?: string
-    }, {}, {}, {}, {}, {}, {}, {}>
+    }, {}, {}, SlotsType<{}>>;
   export const TogglePanel: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'toggle': [_state: boolean]
+      'show': []
+    }, {}, {
       hideActions?: boolean
       initState?: boolean
       title?: string
       storeKey?: string
-    }, {}, {}, {}, {}, {}, {}, {
-      'toggle': [_state: boolean]
-    
-      'show': []
-    }> & { $slots: {
-      'actions'(props: {}): any
-      'default'(props: {}): any
-    }
-  };
+    }, {}, {}, SlotsType<{
+      actions: any,
+      default: any,
+    }>>;
   export const UserAvatarComponent: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
+      size?: IconSize
       user: { id?: string | number; displayName?: string; login?: string; iconUrl?: string; }
-    }, {}, {}, {}, {}, {}, {}, {}>
+    }, {}, {}, SlotsType<{}>>;
   export const UserLinkComponent: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       user?: User
-    }, {}, {}, {}, {}, {}, {}, {}>
+      label?: string
+    }, {}, {}, SlotsType<{}>>;
   export const BaseDialog: DefineComponent<
-    {
-      busy?: boolean
-      showClose?: boolean
-    }, {
+    {},{
       show: () => void
-    
       hide: () => void
     }, {}, {}, {}, {}, {}, {
       'closed': []
-    }> & { $slots: {
-      'header'(props: {}): any
-      'default'(props: {}): any
-      'footer'(props: {}): any
-    }
-  };
+    }, {}, {
+      busy?: boolean
+      showClose?: boolean
+    }, {}, {}, SlotsType<{
+      header: any,
+      default: any,
+      footer: any,
+    }>>;
   export const ButtonsGroupComponent: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       max?: number
       moreLabel?: string
       maxWidth?: number
       zIndex?: number
       group?: string
-      options: DropDownOption[]
-    }, {}, {}, {}, {}, {}, {}, {}>
+      options: DropDownGroupOption[]
+    }, {}, {}, SlotsType<{}>>;
   export const DropDownButton: DefineComponent<
-    {
+    {},{
+      show: () => Promise<void>
+      hide: () => void
+      active: boolean
+    }, {}, {}, {}, {}, {}, {}, {}, {
       fixed?: boolean
       busy?: boolean
       disabled?: boolean
@@ -115,18 +113,13 @@ declare module 'luna' {
       group?: string
       options: DropDownGroupOption[] | OptionsGetterSync | OptionsGetterAsync
       layerClass?: string
-    }, {
-      show: () => Promise<void>
-    
-      hide: () => void
-    
-      active: boolean
-    }, {}, {}, {}, {}, {}, {}> & { $slots: {
-      'default'(props: {}): any
-    }
-  };
+    }, {}, {}, SlotsType<{
+      default: any,
+    }>>;
   export const DropDownLayer: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'clicked': [_option: DropDownOption, _event: MouseEvent]
+    }, {}, {
       fixed?: boolean
       busy?: boolean
       prefferedAlign?: "left" | "right"
@@ -134,79 +127,83 @@ declare module 'luna' {
       zIndex?: number
       align?: "left" | "right" | "auto"
       options?: DropDownGroupOption[]
-      parentPosition?: { x: number; y: number; width: number; height: number; }
-    }, {}, {}, {}, {}, {}, {}, {
-      'clicked': [_option: DropDownOption, _event: MouseEvent]
-    }>
+      parentPosition?: ElemRect
+    }, {}, {}, SlotsType<{}>>;
   export const DropDownLayerItem: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       option?: DropDownOption
-    }, {}, {}, {}, {}, {}, {}, {}>
-  export const CheckboxesComponent: DefineComponent<
-    {
-      modelValue: string[]
-      optionGroups: OptionsGroup<T>[]
-    }, {
+    }, {}, {}, SlotsType<{}>>;
+  export const CheckBoxesComponent: DefineComponent<
+    {},{
       focusTerm: () => void
-    
       addValue: (opt: T) => void
-    
       delValue: (optId: string | number) => void
     }, {}, {}, {}, {}, {}, {
-      'update:modelValue': [value: (string | number)[]]
-    
       'select': [value: T]
-    
       'remove': [value: string | number]
-    }>
+      'update:modelValue': [value: (string | number)[]]
+    }, {}, {
+      optionGroups: OptionsGroup<T>[]
+      valueKey?: keyof T
+      disabled?: boolean
+      busyValue?: string | number
+      emitsOnly?: boolean
+      maxHeight?: string
+      modelValue?: (string | number)[]
+    }, {}, {}, SlotsType<{}>>;
   export const ColorPickerDialog: DefineComponent<
-    {}, {
+    {},{
       show: (colorValue: string, elementValue: HTMLElement) => void
     }, {}, {}, {}, {}, {}, {
       'update': [_color: string]
-    }>
+    }, {}, {}, {}, {}, SlotsType<{}>>;
   export const ColorPickerInput: DefineComponent<
-    {
-      modelValue?: string
-    }, {}, {}, {}, {}, {}, {}, {
+    {},{}, {}, {}, {}, {}, {}, {
       'update:modelValue': [value: string]
-    }> & { $slots: {
-      'default'(props: {}): any
-    }
-  };
+    }, {}, {
+      modelValue?: string
+    }, {}, {}, SlotsType<{
+      default: any,
+    }>>;
   export const ColorPickerLayer: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'update:modelValue': [value: HSV]
+    }, {}, {
       modelValue?: HSV
       field?: HTMLElement
       origValue?: HSV
-    }, {}, {}, {}, {}, {}, {}, {
-      'update:modelValue': [value: HSV]
-    
-      'close': []
-    
-      'updated': [_hsv: HSV]
-    }> & { $slots: {
-      'default'(props: {}): any
-      'footer'(props: {}): any
-    }
-  };
+    }, {}, {}, SlotsType<{
+      default: any,
+      footer: any,
+    }>>;
   export const DateTimePicker: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'update:modelValue': [value: string]
+    }, {}, {
       disabled?: boolean
       withTime?: boolean
       modelValue?: string
-    }, {}, {}, {}, {}, {}, {}, {
-      'update:modelValue': [value: string]
-    }>
+      placeholder?: string
+    }, {}, {}, SlotsType<{}>>;
   export const IconSelector: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'update:modelValue': [value: string]
+    }, {}, {
       type: IconType
       modelValue?: string
-    }, {}, {}, {}, {}, {}, {}, {
-      'update:modelValue': [value: string]
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const MultiSelect: DefineComponent<
-    {
+    {},{
+      addValue: (opt: T) => void
+      delValue: (optId: string | number) => void
+      showLayer: () => void
+      hideLayer: () => void
+    }, {}, {}, {}, {}, {}, {
+      'select': [value: T]
+      'remove': [value: string | number]
+      'create': [value: string]
+      'update:modelValue': [value: (string | number)[]]
+    }, {}, {
       options: T[] | OptionsFunc<T>
       modelData?: T[]
       showIcons?: boolean
@@ -219,43 +216,30 @@ declare module 'luna' {
       iconRadius?: string
       missingIconLiteralKey?: keyof T
       modelValue?: (string | number)[]
-    }, {
-      addValue: (opt: T) => void
-    
-      delValue: (optId: string | number) => void
-    
-      showLayer: () => void
-    
-      hideLayer: () => void
-    }, {}, {}, {}, {}, {}, {
-      'select': [value: T]
-    
-      'remove': [value: string | number]
-    
-      'create': [value: string | number]
-    
-      'update:modelValue': [value: (string | number)[]]
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const QsInput: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'update:modelValue': [value: string]
+      'update:error': [value: string]
+    }, {}, {
       disabled?: boolean
       modelValue?: string
       error?: string
-    }, {}, {}, {}, {}, {}, {}, {
-      'update:modelValue': [value: string]
-    
-      'update:error': [value: string]
-    
-      'submit': []
-    
-      'heightChanged': []
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const QsViewer: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       qs?: string
-    }, {}, {}, {}, {}, {}, {}, {}>
+    }, {}, {}, SlotsType<{}>>;
   export const SingleSelect: DefineComponent<
-    {
+    {},{
+      setValue: (opt: T) => void
+      showLayer: () => void
+      hideLayer: () => void
+    }, {}, {}, {}, {}, {}, {
+      'select': [value: T]
+      'create': [value: string]
+      'update:modelValue': [value: string | number]
+    }, {}, {
       options: T[] | OptionsFunc<T>
       modelData?: T
       showIcons?: boolean
@@ -274,105 +258,211 @@ declare module 'luna' {
       suggestionsWidth?: string
       id?: string
       modelValue?: string | number
-    }, {
-      setValue: (opt: T) => void
-    
-      showLayer: () => void
-    
-      hideLayer: () => void
-    }, {}, {}, {}, {}, {}, {
-      'select': [value: T]
-    
-      'create': [value: string]
-    
-      'update:modelValue': [value: string | number]
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const SliderTrack: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'update:modelValue': [value: number]
+    }, {}, {
       max?: number
       min?: number
       step?: number
       modelValue?: number
-    }, {}, {}, {}, {}, {}, {}, {
-      'update:modelValue': [value: number]
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const SortableList: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'update': [value: T[]]
+      'moved': [optionId: string | number, prevOptionId: string | number]
+      'deleted': [option: T]
+      'update:modelValue': [value: T[]]
+    }, {}, {
       modelValue: T[]
       showIcons?: boolean
       removable?: boolean
       emitsOnly?: boolean
       busy?: boolean
-    }, {}, {}, {}, {}, {}, {}, {
-      'update': [value: T[]]
-    
-      'moved': [optionId: string | number, prevOptionId: string | number]
-    
-      'deleted': [option: T]
-    
-      'update:modelValue': [value: T[]]
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const SortableSelect: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {
+      'update': [_value: T[]]
+      'update:modelValue': [value: T[]]
+    }, {}, {
       modelValue: T[]
       showIcons?: boolean
       options: T[] | OptionsFunc<T>
-    }, {}, {}, {}, {}, {}, {}, {
-      'update': [_value: T[]]
-    
-      'update:modelValue': [value: T[]]
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const SuggestionIconComponent: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       option: T
       missingIconLiteralKey: keyof T
       iconRadius?: string
-    }, {}, {}, {}, {}, {}, {}, {}>
+    }, {}, {}, SlotsType<{}>>;
   export const SuggestionsComponent: DefineComponent<
-    {
+    {},{
+      focusNext: (event?: KeyboardEvent) => void
+      updatePosition: () => void
+    }, {}, {}, {}, {}, {}, {
+      'hide': []
+      'select': [value: T]
+      'create': [value: string]
+    }, {}, {
       suggestions: T[]
       showIcons?: boolean
       term?: string
       field?: HTMLElement
       tag?: string
+      valueKey: keyof T
       suggestionKey?: keyof T | ((item: T) => string)
       cropSuggestions: boolean
       iconRadius?: string
       missingIconLiteralKey?: keyof T
       width?: string
-    }, {
-      focusNext: (event?: KeyboardEvent) => void
-    
-      updatePosition: () => void
-    }, {}, {}, {}, {}, {}, {
-      'hide': []
-    
-      'select': [value: T]
-    
-      'create': [value: string]
-    }>
+    }, {}, {}, SlotsType<{}>>;
   export const MarkdownEditor: DefineComponent<
-    {
-      modelValue?: string
-    }, {}, {}, {}, {}, {}, {}, {
+    {},{}, {}, {}, {}, {}, {}, {
       'update:modelValue': [value: string]
-    }>
+    }, {}, {
+      modelValue?: string
+    }, {}, {}, SlotsType<{}>>;
   export const MarkdownViewer: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       value?: string
-    }, {}, {}, {}, {}, {}, {}, {}>
+    }, {}, {}, SlotsType<{}>>;
   export const ProgressBar: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       busy?: boolean
       value?: number
       total?: number
-    }, {}, {}, {}, {}, {}, {}, {}>
+    }, {}, {}, SlotsType<{}>>;
   export const ProgressComponent: DefineComponent<
-    {
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
       value: number
       total: number
-    }, {}, {}, {}, {}, {}, {}, {}>
-export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale: string) => Promise<Record<string, string>>): I18N}
+    }, {}, {}, SlotsType<{}>>;
+  export const ImageViewer: DefineComponent<
+    {},{
+      show: (imagesData: ImageItem[], idx?: number) => void
+    }, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, SlotsType<{}>>;
+  export const CopyToBufferButton: DefineComponent<
+    {},{}, {}, {}, {}, {}, {}, {}, {}, {
+      value?: string
+    }, {}, {}, SlotsType<{}>>;
+  export const ToggleComponent: DefineComponent<
+    {},{}, {}, {}, {}, {}, {}, {
+      'update:modelValue': [value: boolean]
+    }, {}, {
+      busy?: boolean
+      disabled?: boolean
+      manual?: boolean
+      id?: string
+      modelValue?: boolean
+    }, {}, {}, SlotsType<{}>>;
+  export const SortableTable: DefineComponent<
+    {},{}, {}, {}, {}, {}, {}, {
+      'updated': [_event: SortableEvent]
+      'changed': [_event: SortableEvent]
+    }, {}, {
+      group?: string
+    }, {}, {}, SlotsType<{
+      header: any,
+      default: any,
+      footer: any,
+    }>>;
+  export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale: string) => Promise<Record<string, string>>): I18N}
+  export const RouteNames: {
+        home: "home",
+        dashboard: "dashboard",
+        navigator: "navigator",
+        bulkAction: "bulkAction",
+        bulkActionProgress: "bulkActionProgress",
+        projects: "projects",
+        project: {
+            project: "project",
+            summary: "projectSummary",
+            issues: "projectIssues",
+            activity: "projectActivity",
+            reports: "projectReports",
+            settings: {
+                settings: "projectSettings",
+                summary: "projectSettingsSummary",
+                details: "projectSettingsDetails",
+                issueTypes: "projectSettingsIssueTypes",
+                users: "projectSettingsUsers",
+                schemas: "projectSettingsSchemas",
+                delete: "projectSettingsDelete",
+            },
+        },
+        login: "login",
+        logout: "logout",
+        profile: "profile",
+        searchFilters: "searchFilters",
+        issue: "issue",
+        agile: {
+            boards: "agileBoards",
+            view: "agileBoardView",
+            backlog: "agileBoardBacklog",
+            reports: "agileBoardReports",
+            settings: "agileBoardSettings",
+        },
+        admin: {
+            admin: "admin",
+            users: {
+                users: "adminUsers",
+                list: "adminUserList",
+                user: "adminUser",
+                roles: "adminUserRoles",
+            },
+            groups: "adminGroups",
+            issueTypes: "adminIssueTypes",
+            issueTypeSchemas: "adminIssueTypeSchemas",
+            priorities: "adminPriorities",
+            prioritySchemas: "adminPrioritySchemas",
+            statuses: "adminStatuses",
+            workflows: "adminWorkflows",
+            workflowSchemas: "adminWorkflowSchemas",
+            projects: "adminProjects",
+            projectRoles: "adminProjectRoles",
+            customFields: "adminCustomFields",
+            screens: "adminScreens",
+            screenSchemas: "adminScreenSchemas",
+            issueTypeScreenSchemas: "adminIssueTypeScreenSchemas",
+            permissionSchemas: "adminPermissionSchemas",
+            outgoingMailServers: "adminOutgoingMailServers",
+            outgoingMailQueue: "adminOutgoingMailQueue",
+            incomingMailServers: "adminIncomingMailServers",
+            messageHandlers: "adminMessageHandlers",
+            notificationSchemas: "adminNotificationSchemas",
+            fieldLayouts: "adminFieldLayouts",
+            fieldLayoutSchemas: "adminFieldLayoutSchemas",
+            globalPermissions: "adminGlobalPermissions",
+            properties: "adminProperties",
+            systemInfo: "adminSystemInfo",
+            plugins: "adminPlugins",
+            scheduler: "adminScheduler",
+            issueLinkTypes: "adminIssueLinkTypes",
+            directories: "adminDirectories",
+            indexing: "adminIndexing",
+            backup: "adminBackup",
+            projectImport: "adminProjectImport",
+            logging: "adminLogging",
+            ranking: "adminRanking",
+            docs: "adminDocs",
+            license: "adminLicense",
+            icons: "adminIcons",
+            eventTypes: "adminEventTypes",
+            mailTester: "adminMailTester",
+        },
+        maintenance: "maintenance",
+    }
+  export const Injections: {
+    $notify: InjectionKey<NotifyComponentInterface>,
+    project: InjectionKey<Ref<Project>>,
+    board: InjectionKey<Ref<Board>>,
+    workflowAction: InjectionKey<Ref<WorkflowAction>>,
+    workflowFuncType: InjectionKey<Ref<WorkflowFunctionType>>,
+    workflowActionFunc: InjectionKey<Ref<WorkflowFunctionDescriptor>>,
+    metaIssue: InjectionKey<Ref<MetaIssue>>,
+  }
+  export const $bus: Emitter<BusEvents>
   export interface NotifyComponentInterface {
       info: (title: string, body?: string, closable?: boolean) => void;
       warn: (title: string, body?: string, closable?: boolean) => void;
@@ -380,7 +470,7 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       error: (title: string, body?: string, closable?: boolean) => void;
   }
   export interface I18N {
-      loadMessages(locale: string): void,
+      loadMessages(locale: string): Promise<void>,
       supportedLocales: Array<string>,
       t(text: string, ...args: Array<string|number>): string,
       p(text: string, params: Record<string, any>, ...args: Array<string|number>): string,
@@ -388,68 +478,89 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
   export interface Errors {
       [key: string]: string
   }
-  export type ALIGN = 'top' | 'left' | 'bottom' | 'right';
-  export interface User {
-      id: number
-      directoryId: number,
-      externalId: string,
-      login: string
-      email: string
-      name: string
-      lastName?: string | null
-      displayName: string | null
-      groups?: Array<string>,
-      locale: string,
-      iconName?: string,
-      iconUrl?: string,
-      gender: 'male'|'female',
+  export interface Emitter<Events extends Record<EventType, unknown>> {
+      all: EventHandlerMap<Events>;
+      on<Key extends keyof Events>(type: Key, handler: Handler<Events[Key]>): void;
+      on(type: '*', handler: WildcardHandler<Events>): void;
+      off<Key extends keyof Events>(type: Key, handler?: Handler<Events[Key]>): void;
+      off(type: '*', handler: WildcardHandler<Events>): void;
+      emit<Key extends keyof Events>(type: Key, event: Events[Key]): void;
+      emit<Key extends keyof Events>(type: undefined extends Events[Key] ? Key : never): void;
   }
-  export interface DropDownOption {
-    id: string|number,
-    label: string;
-    iconUrl?: string;
-    iconTitle?: string;
-    iconName?: string;
-    route?: RouteLocationRaw,
-    href?: string;
-    cb?: (option: DropDownOption, event: MouseEvent) => boolean|undefined|void;
-    children?: Array<DropDownGroupOption>;
-    childrenLayerClass?: string;
-    className?: string,
-    title?: string,
-    selected?: boolean,
-  }
-  export interface DropDownGroupOption {
-    id: string|number,
-    label?: string;
-    options: Array<DropDownOption>;
-    className?: string,
-  }
-  export type OptionsGetterSync = () => DropDownGroupOption[]
-  export type OptionsGetterAsync = () => Promise<DropDownGroupOption[]>
+  export declare type EventType = string | symbol;
+  export declare type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<keyof Events | '*', EventHandlerList<Events[keyof Events]> | WildCardEventHandlerList<Events>>;
+  export declare type EventHandlerList<T = unknown> = Array<Handler<T>>;
+  export declare type Handler<T = unknown> = (event: T) => void;
   T = any
-  export type HSV = { h: number, s: number, v: number, a?: number };
-  export enum IconType {
-      IssueType = "issuetypes",
-      Priority = "priorities",
-      Project = "projects",
-      Status = "statuses",
+  export declare type WildCardEventHandlerList<T = Record<string, unknown>> = Array<WildcardHandler<T>>;
+  export declare type WildcardHandler<T = Record<string, unknown>> = (type: keyof T, event: T[keyof T]) => void;
+  export type BusEvents = {
+      'issue.updated': {issue: Issue, fields?: Array<string>, initiator?: string},
+      'issue.created': {issue: Issue, initiator?: string},
+      'issue.deleted': {issue: Issue},
+      'issue.worklog.created': {worklog: Worklog},
+      'issue.worklog.updated': {worklog: Worklog},
+      'issue.attachment.added': {issueKey: string, attachments: Array<Attachment>, initiator: string},
+      'action.create_comment': {issue: Issue},
+      'action.create_link': {issueKey: string, initiator?: string},
+      'action.move_issue': {issue: Issue, initiator?: string},
+      'action.edit_issue': {issueKey: string, fields?: Array<string>, initiator?: string},
+      'action.assign_issue': {issue: Issue, fields?: Array<string>, initiator?: string},
+      'action.delete_issue': {issue: Issue, initiator?: string},
+      'action.transit_issue': {issueKey: string, actionId: number, showDialog: boolean, fields?: Array<string>, initiator?: string},
+      'action.edit_worklog': {issueKey: string, worklog: Worklog},
+      'action.create_worklog': {issueKey: string},
+      'action.edit_field': {issueKey: string, fieldId: string},
+      'action.custom': {name: string, issue?: Issue, initiator?: string, params: Record<string, string>},
+      // workflow
+      'workflow.edit_condition': {condGroup: WorkflowActionConditionGroup},
+      'workflow.remove_condition': {condGroup: WorkflowActionConditionGroup},
+      'workflow.add_condition': {condGroup: WorkflowActionConditionGroup},
+      // user
+      'user.login.required': {resolve?: (user: UserProfile) => void, reject?: () => void},
+      'user.self.updated': {user: UserProfile},
+      // size
+      'site.theme.switched': {theme: 'dark'|'light'}
+  
+      // project
+      'project.updated': {project: ProjectWithSchemas},
+  
+      // filters
+      'search_filter.deleted': {searchFilterId: number}
+  
+      // popovers
+      'popover.show': {event: MouseEvent, group: string, target?: Element, id: string},
   }
-  export type OptionsFunc<T> = (term: string | null, selected: Array<ID>) => Promise<Array<T>>;
-  export type ID = string|number;
-  export interface ActivityStreamSearchQuery extends SearchQuery {
-      projectKey?: string
-      user?: string
-  }
-  export interface ActivityStreamItem {
-      issue: IssueInfo
-      activityStreamTitle: string
-      author: User
-      comment?: Comment
-      worklog?: Worklog
-      changeItems?: Array<ChangeItem>
-      attachments?: Array<Attachment>
-      date: string
+  export interface Issue extends IssueInfo {
+      parent?: IssueInfo,
+      projectId: number,
+      assignee?: User,
+      author?: User,
+      project: Project,
+      priority?: Priority,
+      estimate?: string,
+      timeLeft?: string,
+      timeSpent?: string,
+      estimateValue?: number,
+      timeLeftValue?: number,
+      timeSpentValue?: number,
+      priorityId?: number,
+      status: Status,
+      statusId: number,
+      summary: string,
+      description: string,
+      created: string,
+      updated: string,
+      color?: string,
+      sprint?: Sprint,
+      rank?: string,
+      labels?: Array<Label>,
+      watchers?: WatchersInfo,
+      fields?: {
+          [key: string]: FieldValue
+      },
+      issuePerms: IssuePerms,
+      [key: string]: any
   }
   export interface IssueInfo extends IssueKey {
       id: number,
@@ -462,8 +573,9 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
   export interface IssueType {
       id: number,
       name: string,
+      subtask?: boolean,
       description?: string,
-      iconName: string,
+      iconPath: string,
       iconUrl: string,
   }
   export interface Status {
@@ -486,17 +598,103 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       id: number,
       name: string,
       description?: string,
-      iconName?: string,
+      iconPath?: string,
       iconUrl?: string,
-      sequence: number
+      position: number
   }
-  export interface Comment {
+  export interface User {
+      id: number
+      directoryId: number,
+      externalId: string,
+      login: string
+      email: string
+      name: string
+      lastName?: string | null
+      displayName: string | null
+      groups?: Array<string>,
+      locale: string,
+      iconPath?: string,
+      iconUrl?: string,
+      gender: 'male'|'female',
+      active: boolean,
+  }
+  export interface Project {
+      id: number,
+      key: string,
+      name: string,
+      description?: string,
+      iconPath?: string,
+      iconUrl?: string,
+      canAdminProject: boolean,
+      created: string,
+      lead: User,
+      leadId?: number,
+      assignStrategy: AssignStrategy,
+  }
+  export enum AssignStrategy {
+      LEAD = "lead",
+      AUTHOR = "author",
+  }
+  export interface Sprint {
+      id: number;
+      name: string;
+      author: User,
+      authorId: number;
+      goal: string;
+      boardId: number,
+      displayName: string,
+      state: SprintState,
+      active: boolean,
+      complete: boolean,
+      startDate: string,
+      finishDate: string,
+      activatedDate: string,
+      completedDate: string,
+      auditEntries: Array<SprintAuditEntry>
+  }
+  export enum SprintState {
+      NEW = 'new',
+      ACTIVE = 'active',
+      COMPLETE = 'complete',
+  }
+  export interface SprintAuditEntry {
       id: number,
       author: User,
+      authorId: number,
+      state: SprintState,
       created: string,
-      updated?: string,
-      updater?: User,
-      text: string
+  }
+  export interface Label {
+      id: number,
+      name: string,
+  }
+  export interface WatchersInfo {
+      count: number,
+      watching: boolean,
+  }
+  export type FieldValue = string | null | undefined | object | Array<string>
+  export interface IssuePerms {
+      canEditIssue: boolean,
+      canAssignIssue: boolean,
+      canTransitIssue: boolean,
+      canMoveIssue: boolean,
+      canDeleteIssue: boolean,
+      canCreateComments: boolean,
+      canEditOwnComments: boolean,
+      canEditAllComments: boolean,
+      canDeleteAllComments: boolean,
+      canDeleteOwnComments: boolean,
+      canCreateAttachments: boolean,
+      canDeleteAllAttachments: boolean,
+      canDeleteOwnAttachments: boolean,
+      canCreateWorklogs: boolean,
+      canEditAllWorklogs: boolean,
+      canEditOwnWorklogs: boolean,
+      canDeleteAllWorklogs: boolean,
+      canDeleteOwnWorklogs: boolean,
+      canViewWatchers: boolean,
+      canManageWatchers: boolean,
+      canCreateIssues: boolean,
   }
   export interface Worklog {
       id: number,
@@ -510,13 +708,6 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       timeSpent: string,
       comment: string|null,
   }
-  export interface ChangeItem {
-      id: number,
-      fieldId: string,
-      fieldName: string,
-      oldStringValue: string,
-      newStringValue: string,
-  }
   export interface Attachment {
       id: number,
       authorId: number,
@@ -528,6 +719,320 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       mimeType: string,
       thumbName: string,
       thumbUrl: string,
+  }
+  export interface WorkflowActionConditionGroup {
+      id: string,
+      condition: WorkflowActionFunction | null,
+      items: Array<WorkflowActionConditionGroup> | null,
+      operator: ConditionOperator,
+  }
+  export interface WorkflowActionFunction extends WorkflowFunctionDescriptor {
+      id: string,
+      params: null | WorkflowFunctionParams,
+      viewParams: null | WorkflowFunctionViewParams,
+  }
+  export interface WorkflowFunctionParams {
+      [key: string]: string
+  }
+  export interface WorkflowFunctionViewParams {
+      [key: string]: any
+  }
+  export type ConditionOperator = "and" | "or";
+  export interface UserProfile extends User {
+      activity: UserActivity,
+      admin: boolean,
+      viewUsers: boolean,
+  }
+  export interface UserActivity {
+      dashboardId: number|null,
+      navigatorQs: string | null,
+      navigatorFilterId: number | null,
+      navigatorColumnIds: Array<string>,
+      lastVisitedIssuesIds: Array<number>,
+      lastVisitedProjectIds: Array<number>,
+      navigatorColumns: Array<IssueField>,
+      lastVisitedFilterIds: Array<number>,
+      lastVisitedFilters: Array<SearchFilter>,
+      lastVisitedBoardIds: Array<number>,
+      favoriteFilterIds: Array<number>,
+      favoriteBoardIds: Array<number>,
+  }
+  export interface IssueField {
+      id: string,
+      name: string,
+      description?: string
+      fieldTypeKey: string
+      fieldTypeName: string,
+      editComponent?: string,
+      editComponents?: Array<string>,
+      viewComponent?: string,
+      viewComponents?: Array<string>,
+      navigatorComponent?: string,
+      navigatorComponents?: Array<string>,
+      optionsComponent?: string,
+      searcherKey: string
+      searcherName: string,
+      valid: boolean,
+      systemField: boolean,
+      contexts: Array<IssueFieldContext>,
+      //options: Array<Option<number>>,
+  }
+  export interface IssueFieldContext {
+      id: number,
+      name: string,
+      description?: string,
+      projectIds: Array<number>,
+      issueTypeIds: Array<number>,
+      defaultValue?: FieldValue,
+      options: Array<Option<number>>,
+  }
+  export interface Option<T> {
+      id: T,
+      name: string,
+      iconUrl?: string,
+      altName?: string,
+  }
+  export interface SearchFilter extends SharedObject {
+      id: number,
+      name: string,
+      description: string,
+      queryString: string,
+      author: User,
+      authorId: number,
+      updateAuthorId?: number,
+      created: string,
+      updated?: string,
+  
+  }
+  export interface ProjectWithSchemas extends Project {
+      issueTypeSchemaId: number | null,
+      resolutionSchemaId: number | null,
+      issueTypeScreenSchemaId: number | null,
+      fieldLayoutSchemaId: number | null,
+      fieldLayoutSchema: FieldLayoutSchema | null,
+      prioritySchemaId: number | null,
+      issueTypeSchema: IssueTypeSchema | null,
+      resolutionSchema: ResolutionSchema | null,
+      issueTypeScreenSchema: IssueTypeScreenSchema | null,
+      prioritySchema: PrioritySchema | null,
+      workflowSchemaId: number|null,
+      workflowSchema: WorkflowSchema|null,
+      permissionSchemaId: number|null,
+      permissionSchema: PermissionSchema|null,
+      notificationSchemaId: number|null,
+      notificationSchema: NotificationSchema|null,
+  }
+  export interface FieldLayoutSchema {
+      id: number,
+      name: string,
+      description: string,
+      defaultLayout: FieldLayout,
+      defaultLayoutId: number,
+      entries: Array<FieldLayoutSchemaEntry>
+  }
+  export interface FieldLayout {
+      id: number,
+      name: string,
+      description: string,
+      fieldLayoutItems: Array<FieldLayoutItem>
+  }
+  export interface FieldLayoutItem {
+      fieldId: string,
+      field: IssueField,
+      required: boolean,
+  }
+  export interface FieldLayoutSchemaEntry {
+      issueType: IssueType,
+      fieldLayout: FieldLayout,
+  }
+  export interface IssueTypeSchema {
+      id: number,
+      name: string,
+      description?: string,
+      issueTypes: Array<IssueType>,
+      issueTypeIds: Array<number>,
+  }
+  export interface ResolutionSchema {
+      id: number,
+      name: string,
+      description?: string,
+      resolutions: Array<Resolution>,
+  }
+  export interface Resolution {
+      id: number,
+      name: string,
+      description?: string,
+  }
+  export interface IssueTypeScreenSchema {
+      id: number,
+      name: string,
+      description?: string | null,
+      defaultScreenSchema: ScreenSchema,
+      defaultScreenSchemaId: number,
+      entries: {
+          [key: number]: ScreenSchema
+      },
+      assignedIssueTypesMap: {[key: number]: IssueType}
+  }
+  export interface ScreenSchema {
+      id: number,
+      name: string,
+      description?: string | null,
+      defaultScreen: Screen,
+      defaultScreenId: number,
+      createScreen?: Screen,
+      createScreenId?: number,
+      editScreen?: Screen,
+      editScreenId?: number,
+      viewScreen?: Screen,
+      viewScreenId?: number,
+  }
+  export interface Screen {
+      id: number,
+      name: string,
+      description: string,
+      tabs: Array<ScreenTab>
+  }
+  export interface ScreenTab {
+      id: number,
+      name: string,
+      fieldIds: Array<string>,
+      fields: Array<IssueField>,
+  }
+  export interface PrioritySchema {
+      id: number,
+      name: string,
+      description?: string,
+      priorities: Array<Priority>,
+  }
+  export interface WorkflowSchema {
+      id: number,
+      name: string,
+      description: string|null,
+      defaultWorkflow: WorkflowSimple,
+      defaultWorkflowId: number,
+      entries: Array<WorkflowSchemaEntry>,
+      active: boolean,
+  }
+  export interface WorkflowSimple {
+      id: number,
+      name: string,
+      description: string|null,
+      originalId: number|null,
+  }
+  export interface WorkflowSchemaEntry {
+      issueType: IssueType,
+      workflow: WorkflowSimple,
+  }
+  export interface PermissionSchema {
+      id: number,
+      name: string,
+      description: string|null,
+      permissionsMap: {
+          [key: string]: PermissionSchemaEntry
+      }
+  }
+  export interface PermissionSchemaEntry {
+      userIds: Array<number>,
+      groupNames: Array<string>,
+      projectRoleIds: Array<number>,
+      userFieldIds: Array<string>,
+  }
+  export interface NotificationSchema {
+      id: number,
+      name: string,
+      description: string|null,
+      notificationsMap: {
+          [key: string]: NotificationSchemaEntry
+      }
+  }
+  export interface NotificationSchemaEntry {
+      userIds: Array<number>,
+      groupNames: Array<string>,
+      projectRoleIds: Array<string>,
+      userFieldIds: Array<string>,
+  }
+  export type ALIGN = 'top' | 'left' | 'bottom' | 'right';
+  export enum IconSize {
+      ORIGINAL = "original",
+      SMALL = "32x32",
+      MEDIUM = "64x64",
+      LARGE = "128x128",
+      X_LARGE = "256x256",
+  }
+  export interface DropDownGroupOption {
+      id: string|number,
+      label?: string;
+      options: Array<DropDownOption>;
+      className?: string,
+  }
+  export interface DropDownOption {
+      id: string|number,
+      label: string;
+      iconUrl?: string;
+      iconTitle?: string;
+      iconName?: string;
+      route?: RouteLocationRaw,
+      href?: string;
+      cb?: (option: DropDownOption, event: MouseEvent) => boolean|undefined|void;
+      children?: Array<DropDownGroupOption>;
+      childrenLayerClass?: string;
+      className?: string,
+      title?: string,
+      selected?: boolean,
+  }
+  export type OptionsGetterSync = () => DropDownGroupOption[]
+  export type OptionsGetterAsync = () => Promise<DropDownGroupOption[]>
+  export interface ElemRect {
+    x: number,
+    y: number,
+    width: number,
+    height: number
+  }
+  export type HSV = { h: number, s: number, v: number, a?: number };
+  export enum IconType {
+      ISSUE_TYPE = "issuetypes",
+      PRIORITY = "priorities",
+      PROJECT = "projects",
+      AVATAR = "users",
+  }
+  export type OptionsFunc<T> = (term: string | null, selected: Array<ID>) => Promise<Array<T>>;
+  export type ID = string|number;
+  export interface ImageItem {
+    id: number,
+    name: string,
+    description?: string,
+    imageUrl: string,
+    thumbUrl?: string,
+  }
+  export interface ActivityStreamSearchQuery extends SearchQuery {
+      projectKey?: string
+      user?: string
+  }
+  export interface ActivityStreamItem {
+      issue: IssueInfo
+      activityStreamTitle: string
+      author: User
+      comment?: Comment
+      worklog?: Worklog
+      changeItems?: Array<ChangeItem>
+      attachments?: Array<Attachment>
+      date: string
+  }
+  export interface Comment {
+      id: number,
+      author: User,
+      created: string,
+      updated?: string,
+      updater?: User,
+      text: string
+  }
+  export interface ChangeItem {
+      id: number,
+      fieldId: string,
+      fieldName: string,
+      oldStringValue: string,
+      newStringValue: string,
   }
   export interface ActivityStreamItemGrouped {
       groupedUser: User
@@ -570,61 +1075,6 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       description: string,
       queryString: string,
   }
-  export interface IssueField {
-      id: string,
-      name: string,
-      description?: string
-      fieldTypeKey: string
-      fieldTypeName: string,
-      editComponent?: string,
-      editComponents?: Array<string>,
-      viewComponent?: string,
-      viewComponents?: Array<string>,
-      navigatorComponent?: string,
-      navigatorComponents?: Array<string>,
-      optionsComponent?: string,
-      searcherKey: string
-      searcherName: string,
-      valid: boolean,
-      systemField: boolean,
-      contexts?: Array<IssueFieldContext>,
-      options?: Array<Option<number>>,
-  }
-  export interface IssueFieldContext {
-      id: number,
-      name: string,
-      description?: string,
-      projectIds?: Array<number>,
-      issueTypeIds?: Array<number>,
-      projects?: Array<Project>,
-      issueTypes?: Array<IssueType>,
-      defaultValue?: FieldValue,
-      options?: Array<Option<number>>,
-  }
-  export interface Project {
-      id: number,
-      key: string,
-      name: string,
-      description?: string,
-      iconName?: string,
-      iconUrl?: string,
-      canAdminProject: boolean,
-      created: string,
-      lead: User,
-      leadId?: number,
-      assignStrategy: AssignStrategy,
-  }
-  export enum AssignStrategy {
-      LEAD = "lead",
-      AUTHOR = "author",
-  }
-  export type FieldValue = string | null | undefined | object | Array<string>
-  export interface Option<T> {
-      id: T,
-      name: string,
-      iconUrl?: string,
-      altName?: string,
-  }
   export interface CardColorPreset {
       strategy: ColorStrategy,
       colors: Array<CardColor>,
@@ -633,35 +1083,6 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       id: number,
       value: string,
       color: string,
-  }
-  export interface Sprint {
-      id: number;
-      name: string;
-      author: User,
-      authorId: number;
-      goal: string;
-      boardId: number,
-      displayName: string,
-      state: SprintState,
-      active: boolean,
-      complete: boolean,
-      startDate: string,
-      finishDate: string,
-      activatedDate: string,
-      completedDate: string,
-      auditEntries: Array<SprintAuditEntry>
-  }
-  export enum SprintState {
-      NEW = 'new',
-      ACTIVE = 'active',
-      COMPLETE = 'complete',
-  }
-  export interface SprintAuditEntry {
-      id: number,
-      author: User,
-      authorId: number,
-      state: SprintState,
-      created: string,
   }
   export interface KanbanBoard extends Board {
   
@@ -678,61 +1099,6 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       results: Array<T>,
       page: number,
       limit: number,
-  }
-  export interface Issue extends IssueInfo {
-      projectId: number,
-      assignee?: User,
-      author?: User,
-      project: Project,
-      priority?: Priority,
-      estimate?: string,
-      timeLeft?: string,
-      timeSpent?: string,
-      estimateValue?: number,
-      timeLeftValue?: number,
-      timeSpentValue?: number,
-      priorityId?: number,
-      status: Status,
-      statusId: number,
-      summary: string,
-      description: string,
-      created: string,
-      updated: string,
-      color?: string,
-      sprint?: Sprint,
-      rank?: string,
-      watchers: WatchersInfo,
-      fields?: {
-          [key: string]: FieldValue
-      },
-      issuePerms: IssuePerms,
-      [key: string]: any
-  }
-  export interface WatchersInfo {
-      count: number,
-      watching: boolean,
-  }
-  export interface IssuePerms {
-      canEditIssue: boolean,
-      canAssignIssue: boolean,
-      canTransitIssue: boolean,
-      canMoveIssue: boolean,
-      canDeleteIssue: boolean,
-      canCreateComments: boolean,
-      canEditOwnComments: boolean,
-      canEditAllComments: boolean,
-      canDeleteAllComments: boolean,
-      canDeleteOwnComments: boolean,
-      canCreateAttachments: boolean,
-      canDeleteAllAttachments: boolean,
-      canDeleteOwnAttachments: boolean,
-      canCreateWorklogs: boolean,
-      canEditAllWorklogs: boolean,
-      canEditOwnWorklogs: boolean,
-      canDeleteAllWorklogs: boolean,
-      canDeleteOwnWorklogs: boolean,
-      canViewWatchers: boolean,
-      canManageWatchers: boolean,
   }
   export interface BoardIssues {
       issues: Array<Issue>,
@@ -775,10 +1141,10 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
   }
   export interface DashboardWidget extends WidgetPosition {
       id: number,
-      widgetType: DashboardWidgetType,
+      widgetDescriptor: DashboardWidgetDescriptor,
       params: WidgetParams,
   }
-  export interface DashboardWidgetType {
+  export interface DashboardWidgetDescriptor {
       key: string,
       name: string,
       description: string,
@@ -799,27 +1165,79 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       reason: string,
       errors: Errors
   }
+  export interface MessageSet {
+      errorMessages: Array<string>
+      warningMessages: Array<string>
+  }
   export interface IssueEventType {
-      id: string,
+      id: number,
       name: string,
-      description: string | null
+      description: string | null,
+      baseEventTypeId: number,
+      systemEvent: boolean,
+  }
+  export interface IconKey {
+      key: string,
+      type: IconType,
+      format: IconFormat,
+      path: string,
+  }
+  export enum IconFormat {
+      SVG = "svg",
+      PNG = "png",
   }
   export interface Icon {
-      name: string,
-      iconType: string,
+      id: number,
+      key: IconKey,
+      fileName: string,
+      path: string,
       url: string,
   }
+  export interface BulkActionDescriptor {
+    key: string,
+    name: string,
+    description: string,
+    paramsComponent: string,
+    confirmComponent: string,
+  }
+  export interface BulkActionProgress {
+    taskId: string,
+    actionKey: string,
+    actionName: string,
+    actionDescription: string,
+    initiator: User,
+    startDate: string,
+    finishDate?: string,
+    progress: number,
+    progressMessage: string,
+    active: boolean,
+    duration: number,
+  }
+  export interface BulkActionRequest {
+    actionKey: string,
+    actionParams: any,
+    issueKeys: Array<string>,
+  }
   export interface ExportModule {
-      id: string,
+      key: string,
       name: string,
       webComponent: string,
   }
   export interface ExportParams {
-      moduleId: string,
+      moduleKey: string,
       limit: number,
       fields: Array<string>,
       qs: string,
       extraParams?: {[key: string]: string},
+  }
+  export interface IssueFieldResponse extends IssueField {
+      contexts: Array<IssueFieldContextResponse>,
+  }
+  export interface IssueFieldContextResponse extends IssueFieldContext {
+      projects: Array<Project>,
+      issueTypes: Array<IssueType>,
+      viewParams: Record<string, any>,
+      editParams: Record<string, any>,
   }
   export interface FieldTypeDescriptor {
       key: string,
@@ -830,11 +1248,10 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       viewComponents?: Array<string>,
       editComponents?: Array<string>,
   }
-  export interface FieldSearcher {
+  export interface FieldSearcherDescriptor {
       key: string,
       name: string,
       description?: string,
-      webComponent: string,
   }
   export interface ChangeGroup {
       id: number,
@@ -842,49 +1259,9 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       created: string,
       changeItems: {[key: string]: ChangeItem},
   }
-  export interface IndexingStatus {
-      startDate: string,
-      finishDate: string,
-      time: number,
-      total: number,
-      completed: number,
-      failures: number,
-      state: 'calc' | 'indexing' | 'done' | 'fail',
-      running: boolean,
-      progress: number,
-      planningCompleteDate: string,
-  }
-  export interface IndexingStats {
-      indexedIssuesCount: number,
-      storedIssuesCount: number,
-  }
-  export interface IssueTypeSchema {
-      id: number,
-      name: string,
-      description?: string,
-      issueTypes: Array<IssueType>,
-      issueTypeIds: Array<number>,
-  }
   export interface PriorityAffectedSchemas {
       priority: Priority,
       prioritySchemas: Array<PrioritySchema>,
-  }
-  export interface PrioritySchema {
-      id: number,
-      name: string,
-      description?: string,
-      priorities: Array<Priority>,
-  }
-  export interface Resolution {
-      id: number,
-      name: string,
-      description?: string,
-  }
-  export interface ResolutionSchema {
-      id: number,
-      name: string,
-      description?: string,
-      resolutions: Array<Resolution>,
   }
   export interface IssueKey {
       key: string
@@ -893,29 +1270,6 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
   }
   export interface IssueSearchResult extends SearchResult<Issue> {
       fields: Array<IssueField>
-  }
-  export interface FieldLayoutItem {
-      fieldId: string,
-      field: IssueField,
-      required: boolean,
-  }
-  export interface FieldLayout {
-      id: number,
-      name: string,
-      description: string,
-      fieldLayoutItems: Array<FieldLayoutItem>
-  }
-  export interface FieldLayoutSchemaEntry {
-      issueType: IssueType,
-      fieldLayout: FieldLayout,
-  }
-  export interface FieldLayoutSchema {
-      id: number,
-      name: string,
-      description: string,
-      defaultLayout: FieldLayout,
-      defaultLayoutId: number,
-      entries: Array<FieldLayoutSchemaEntry>
   }
   export interface IssueLinkType {
       id: number,
@@ -946,6 +1300,8 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       viewComponent: string,
       editComponent: string,
       editable: boolean,
+      editParams: Record<string, any>,
+      viewParams: Record<string, any>,
   }
   export interface MetaIssueTab {
       id: number,
@@ -972,6 +1328,22 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       requiredFields: Array<string>,
       descriptionField: MetaIssueField,
       priorityField: MetaIssueField,
+      labelField: MetaIssueField,
+      subtaskTypes: Array<IssueType>,
+      customActions: Array<WebNode>,
+  }
+  export interface WebNode {
+      id: number,
+      name: string,
+      routeName: string,
+      eventName: string,
+      routeParams: {[key: string]: string},
+      routeQuery: {[key: string]: string},
+      iconUrl: string,
+      iconTitle: string,
+      hint: string,
+      children: Array<WebNode>,
+      section: boolean,
   }
   export interface IssueMoveResponse {
       project: Project,
@@ -1002,14 +1374,28 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       minimumRequiredArguments: boolean,
   }
   export interface QuerySearcher {
-      fieldId: string,
-      fieldName: string,
+      id: string,
+      name: string,
+      nameQs: string,
       valueType: string,
       allowedOperators: Array<QueryOperator>,
+      supportBasicSearch: boolean,
   }
   export interface QuerySorter {
-      fieldId: string,
-      fieldName: string,
+      id: string,
+      name: string,
+  }
+  export interface SearcherRepresentation {
+      id: string,
+      name: string,
+      qsFragment: string,
+      viewLabel: string,
+      editComponent: string,
+      formValue: any,
+  }
+  export interface QueryRepresentation {
+      valid: boolean,
+      searchers: Array<SearcherRepresentation>,
   }
   export interface TimeSheerReportRequest {
       projectOrFilter: string|number,
@@ -1052,133 +1438,9 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
     issueTypeScreenSchemas: Array<IssueTypeScreenSchema>
     fieldLayoutSchemas: Array<FieldLayoutSchema>
   }
-  export interface WorkflowSchema {
-      id: number,
-      name: string,
-      description: string|null,
-      defaultWorkflow: Workflow,
-      defaultWorkflowId: number,
-      entries: Array<WorkflowSchemaEntry>,
-  }
-  export interface Workflow {
-      id: number,
-      name: string,
-      description: string | null,
-      statuses: Array<Status>,
-      display: {
-          statusPositionMap: {
-              [kay: number]: Position
-          },
-          canvasPosition: Position,
-          actionPorts: {
-              [key: number]: {
-                  left: NodePort,
-                  right: NodePort,
-              }
-          },
-      },
-      createAction: WorkflowAction,
-      actions: Array<WorkflowAction>,
-      originalId: number | null,
-      author: User | null,
-      updater: User | null,
-      created: string | null,
-      updated: string | null,
-  }
-  export interface Position {
-      x: number,
-      y: number,
-  }
-  export interface NodePort {
-      nodeId: number,
-      direction: Direction|null,
-      index: number,
-  }
-  export type Direction = 'left' | 'right' | 'top' | 'bottom';
-  export interface WorkflowAction {
-      id: number,
-      name: string,
-      sourceStatusIds: Array<number>,
-      targetStatusId: number,
-      screenId: number|null,
-      screen: Screen|null,
-      validators: Array<WorkflowActionFunction>,
-      conditions: WorkflowActionConditionGroup,
-      postfunctions: Array<WorkflowActionFunction>,
-  }
-  export interface Screen {
-      id: number,
-      name: string,
-      description: string,
-      tabs: Array<ScreenTab>
-  }
-  export interface ScreenTab {
-      id: number,
-      name: string,
-      fieldIds: Array<string>,
-      fields: Array<IssueField>,
-  }
-  export interface WorkflowActionFunction extends WorkflowFunctionDescriptor {
-      id: string,
-      params: null | WorkflowFunctionParams,
-      viewParams: null | WorkflowFunctionViewParams,
-  }
-  export interface WorkflowFunctionParams {
-      [key: string]: string
-  }
-  export interface WorkflowFunctionViewParams {
-      [key: string]: any
-  }
-  export interface WorkflowActionConditionGroup {
-      id: string,
-      condition: WorkflowActionFunction | null,
-      items: Array<WorkflowActionConditionGroup> | null,
-      operator: ConditionOperator,
-  }
-  export type ConditionOperator = "and" | "or";
-  export interface WorkflowSchemaEntry {
-      issueType: IssueType,
-      workflow: Workflow,
-  }
-  export interface IssueTypeScreenSchema {
-      id: number,
-      name: string,
-      description?: string | null,
-      defaultScreenSchema: ScreenSchema,
-      defaultScreenSchemaId: number,
-      entries: {
-          [key: number]: ScreenSchema
-      },
-      assignedIssueTypesMap: {[key: number]: IssueType}
-  }
-  export interface ScreenSchema {
-      id: number,
-      name: string,
-      description?: string | null,
-      defaultScreen: Screen,
-      defaultScreenId: number,
-      createScreen?: Screen,
-      createScreenId?: number,
-      editScreen?: Screen,
-      editScreenId?: number,
-      viewScreen?: Screen,
-      viewScreenId?: number,
-  }
   export interface ScreenSchemaAffectedSchemas {
       screenSchema: ScreenSchema,
       issueTypeScreenSchemas: Array<IssueTypeScreenSchema>,
-  }
-  export interface SearchFilter extends SharedObject {
-      id: number,
-      name: string,
-      description: string,
-      queryString: string,
-      author: User,
-      authorId: number,
-      updateAuthorId?: number,
-      created: string,
-      updated?: string,
-  
   }
   export interface SearchFilterQueryParams extends SearchQuery {
       author?: Array<number>,
@@ -1195,14 +1457,56 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       editComponent: string | null,
   }
   export type WorkflowFunctionType = 'postfunction' | 'validator' | 'condition';
+  export interface WorkflowAction {
+      id: number,
+      name: string,
+      sourceStatusIds: Array<number>,
+      targetStatusId: number,
+      screenId: number|null,
+      screen: Screen|null,
+      validators: Array<WorkflowActionFunction>,
+      conditions: WorkflowActionConditionGroup,
+      postfunctions: Array<WorkflowActionFunction>,
+  }
+  export interface Workflow extends WorkflowSimple {
+      statuses: Array<Status>,
+      display: {
+          statusPositionMap: {
+              [kay: number]: Position
+          },
+          canvasPosition: Position,
+          actionPorts: {
+              [key: number]: {
+                  left: NodePort,
+                  right: NodePort,
+              }
+          },
+      },
+      createAction: WorkflowAction,
+      actions: Array<WorkflowAction>,
+      author: User | null,
+      updater: User | null,
+      created: string | null,
+      updated: string | null,
+  }
+  export interface Position {
+      x: number,
+      y: number,
+  }
+  export interface NodePort {
+      nodeId: number,
+      direction: Direction|null,
+      index: number,
+  }
+  export type Direction = 'left' | 'right' | 'top' | 'bottom';
   export interface WorkflowSchemaSimple {
       id: number,
       name: string,
       description: string|null,
       workflowIds: Array<number>,
   }
-  export interface WorkflowSearchResult extends SearchResult<Workflow>{
-      drafts: Array<Workflow>,
+  export interface WorkflowSearchResult extends SearchResult<WorkflowSimple> {
+      drafts: Array<WorkflowSimple>,
       schemas: Array<WorkflowSchemaSimple>,
   }
   export interface Directory {
@@ -1213,7 +1517,7 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       directoryType: DirectoryType,
       attributes: DirectoryAttributes,
       active: boolean,
-      sequence: number,
+      position: number,
   }
   export interface DirectoryType {
       key: string,
@@ -1246,31 +1550,12 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       name: string,
       description?: string
   }
-  export interface UserActivity {
-      dashboardId: number|null,
-      navigatorQs: string | null,
-      navigatorFilterId: number | null,
-      navigatorColumnIds: Array<string>,
-      lastVisitedIssuesIds: Array<number>,
-      lastVisitedProjectIds: Array<number>,
-      navigatorColumns: Array<IssueField>,
-      lastVisitedFilterIds: Array<number>,
-      lastVisitedFilters: Array<SearchFilter>,
-      lastVisitedBoardIds: Array<number>,
-      favoriteFilterIds: Array<number>,
-      favoriteBoardIds: Array<number>,
-  }
   export interface UserActivityRequest {
       navigatorColumnIds: Array<string>,
       favoriteFilterIds: Array<number>,
       unFavoriteFilterIds: Array<number>,
       favoriteBoardIds: Array<number>,
       unFavoriteBoardIds: Array<number>,
-  }
-  export interface UserProfile extends User {
-      activity: UserActivity,
-      admin: boolean,
-      viewUsers: boolean,
   }
   export interface PortPosition extends Position {
       direction?: Direction|null,
@@ -1308,6 +1593,19 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       name: string;
       [key: string]: any;
   }
+  export interface ProgressStep {
+      id: string,
+      name: string,
+      description?: string,
+  }
+  export interface ProjectInfo {
+      id: number,
+      key: string,
+      name: string,
+      description: string,
+      iconPath: string,
+      iconUrl: string,
+  }
   export interface ProjectWithIssueTypes extends Project {
       issueTypes: Array<IssueType>
   }
@@ -1320,52 +1618,6 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       workflowSchemaId: number|null,
       permissionSchemaId: number|null,
       notificationSchemaId: number|null,
-  }
-  export interface ProjectWithSchemas extends Project {
-      issueTypeSchemaId: number | null,
-      resolutionSchemaId: number | null,
-      issueTypeScreenSchemaId: number | null,
-      fieldLayoutSchemaId: number | null,
-      fieldLayoutSchema: FieldLayoutSchema | null,
-      prioritySchemaId: number | null,
-      issueTypeSchema: IssueTypeSchema | null,
-      resolutionSchema: ResolutionSchema | null,
-      issueTypeScreenSchema: IssueTypeScreenSchema | null,
-      prioritySchema: PrioritySchema | null,
-      workflowSchemaId: number|null,
-      workflowSchema: WorkflowSchema|null,
-      permissionSchemaId: number|null,
-      permissionSchema: PermissionSchema|null,
-      notificationSchemaId: number|null,
-      notificationSchema: NotificationSchema|null,
-  }
-  export interface PermissionSchema {
-      id: number,
-      name: string,
-      description: string|null,
-      permissionsMap: {
-          [key: string]: PermissionSchemaEntry
-      }
-  }
-  export interface PermissionSchemaEntry {
-      userIds: Array<number>,
-      groupNames: Array<string>,
-      projectRoleIds: Array<number>,
-      userFieldIds: Array<string>,
-  }
-  export interface NotificationSchema {
-      id: number,
-      name: string,
-      description: string|null,
-      notificationsMap: {
-          [key: string]: NotificationSchemaEntry
-      }
-  }
-  export interface NotificationSchemaEntry {
-      userIds: Array<number>,
-      groupNames: Array<string>,
-      projectRoleIds: Array<string>,
-      userFieldIds: Array<string>,
   }
   export interface ProjectMembers {
       project: Project,
@@ -1386,8 +1638,8 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       id: string,
       name: string,
   }
-  export interface Report {
-      id: string;
+  export interface ReportModuleDescriptor {
+      key: string;
       name: string;
       category: ReportCategory;
       description: string;
@@ -1416,7 +1668,8 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
   export interface IssueSearchQuery extends SearchQuery {
       filter?: number,
       qs?: string,
-      fields?: Array<string>
+      fields?: Array<string>,
+      updateActivity?: 1|0,
   }
   export interface SearchQueryExt {
       term?: string,
@@ -1439,6 +1692,62 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       defaultLocale: string,
       indexingLocale: string,
   }
+  export interface BackupTableStatus {
+    tableName: string,
+    totalRows: number,
+    completedRows: number,
+  }
+  export enum BackupPhase {
+    CALC = "calc",
+    BACKUP = "backup",
+    DONE = "done",
+    FAIL = "fail",
+    CANCELED = "canceled",
+  }
+  export interface BackupStatus {
+    startDate: string,
+    finishDate: string,
+    duration: number,
+    progress: number,
+    planningCompleteDate: string,
+    phase: BackupPhase,
+    totalRows: number,
+    completedRows: number,
+    filePath: string,
+    tableStatus: BackupTableStatus,
+    cancelled: boolean,
+    running: boolean,
+  }
+  export interface BackupStatusResponse {
+    status: BackupStatus,
+    backupDir: string
+  }
+  export interface OpenApiDoc {
+    url: string,
+    name: string,
+  }
+  export enum IndexingPhase {
+      CALC = 'calc',
+      INDEXING = 'indexing',
+      DONE = 'done',
+      FAIL = 'fail',
+  }
+  export interface IndexingStatus {
+      startDate: string,
+      finishDate: string,
+      duration: number,
+      total: number,
+      completed: number,
+      failures: number,
+      phase: IndexingPhase,
+      running: boolean,
+      progress: number,
+      planningCompleteDate: string,
+  }
+  export interface IndexingStats {
+      indexedIssuesCount: number,
+      storedIssuesCount: number,
+  }
   export interface SystemInfo {
     groups: Array<SystemInfoGroup>;
   }
@@ -1452,18 +1761,43 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
     label: string,
     value: string,
   }
+  export enum LicenceType {
+    DEVELOPMENT = 'development',
+    COMMERCIAL = 'commercial',
+    TRIAL = 'trial',
+  }
+  export interface LicenseDetails {
+    id: string,
+    serverId: string,
+    app: string,
+    type: LicenceType,
+    version: number,
+    startAt: string,
+    expiresAt: string,
+    userLimit: number,
+    current: boolean,
+    expired: boolean,
+  
+    customerName: string,
+    issuedAt: string,
+  }
+  export interface AppLicenseResponse {
+    licenses: Array<LicenseDetails>,
+    activeUserCount: number,
+  }
   export interface LoggingEntry {
     id: string,
     packageName: string,
     level: string,
   }
+  export type MailEncryption = 'start_tls' | 'ssl_tls';
   export interface IncomingMailServer {
       id: number,
       name: string,
       description: string,
       protocol: 'pop3' | 'imap',
-      useSSL: boolean,
-      startTLS: boolean,
+      encryption: MailEncryption | null,
+      disableCertVerification: boolean,
       timeout: number,
       host: string,
       port: number,
@@ -1479,8 +1813,8 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       host: string,
       port: number,
       timeout: number,
-      startTLS: boolean,
-      useSSL: boolean,
+      encryption: MailEncryption | null,
+      disableCertVerification: boolean,
       username: string,
       password?: string,
   }
@@ -1532,6 +1866,12 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       projectRoles: Array<ProjectRole>,
       userFields: Array<IssueField>,
   }
+  export interface MailPreviewResponse {
+      duration: number,
+      eventTypeId: number,
+      subject: string,
+      html: string,
+  }
   export interface Permission {
       id: string,
       name: string,
@@ -1565,8 +1905,9 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       version: string,
       vendor: PluginVendor,
       enabled: boolean,
-      components: Array<PluginComponent>
-      resources: Array<PluginResource>
+      components: Array<PluginComponent>,
+      resources: Array<PluginResource>,
+      activeDocs: Array<string>
   }
   export interface PluginVendor {
       name?: string,
@@ -1586,14 +1927,20 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       path: string,
       enabled: boolean,
       resourceUrl: string,
+      mount?: 'admin' | 'general',
+  }
+  export enum RankingPhase {
+    CALC = 'calc',
+    RANKING = 'ranking',
+    DONE = 'done',
   }
   export interface RankingStatus {
     startDate: string,
     finishDate: string,
-    time: number,
+    duration: number,
     total: number,
     completed: number,
-    state: 'calc' | 'ranking' | 'done',
+    phase: RankingPhase,
     running: boolean,
     planningCompleteDate: string,
     progress: number,
@@ -1602,6 +1949,74 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
   export interface RankingStats {
     issueField: IssueField,
     missingCount: number,
+  }
+  export interface BackupMetaProject {
+    id: number,
+    key: string,
+    name: string,
+    description: string,
+    issueCount: number,
+    parseResult?: ProjectParseResult,
+  }
+  export interface ProjectParseResult {
+    startDate: string,
+    finishDate: string,
+    errors: Record<string, MessageSet>,
+    valid: boolean,
+    issueCount: number,
+    attachmentCount: number,
+    commentCount: number,
+    watcherCount: number,
+    worklogCount: number,
+    changeGroupCount: number,
+    changeItemCount: number,
+  }
+  export interface BackupMeta {
+    backupName: string,
+    backupCRC32: number,
+    backupSize: number,
+    backupDate: string,
+    parseStartDate: string,
+    parseFinishDate: string,
+    projects: Array<BackupMetaProject>,
+  }
+  export interface ProjectImportResult {
+    startDate: string,
+    finishDate: string,
+    errors: Record<string, MessageSet>,
+    issueCount: number,
+    attachmentCount: number,
+    commentCount: number,
+    watcherCount: number,
+    worklogCount: number,
+    changeGroupCount: number,
+    changeItemCount: number,
+  }
+  export enum ProjectImportPhase {
+      IDLE = "idle",
+      ANALYZING = "analyzing",
+      VALIDATING = "validating",
+      IMPORTING = "importing",
+  }
+  export interface ProjectImportProgress  {
+    percent: number,
+    message: string,
+  }
+  export interface ProjectImportSession {
+    backupFile: string,
+    backupName: string,
+    phaseStartDate: string,
+    phaseFinishDate: string,
+    phaseProgress: ProjectImportProgress,
+    phase: ProjectImportPhase,
+    errors: Record<string, string>,
+    backupMeta: BackupMeta,
+    selectedProjectKey: string,
+    projectParseResult?: ProjectParseResult,
+    projectImportResult?: ProjectImportResult,
+  }
+  export interface RestoreInfoResponse {
+    importDirectory: string,
   }
   export interface Scheduler {
     cronExpression?: string,
@@ -1637,17 +2052,9 @@ export const I18N: I18N & {new(supportedLocales: Array<string>, loader: (locale:
       progress?: number,
       plannedCompleteDate?: string,
   }
-  export interface WebNode {
-      id: number,
-      name: string,
-      routeName: string,
-      routeParams: {[key: string]: string},
-      routeQuery: {[key: string]: string},
-      iconUrl: string,
-      iconTitle: string,
-      hint: string,
-      children: Array<WebNode>,
-      section: boolean,
+  export interface NamedResponse {
+    id: number,
+    name: string,
   }
   export interface WebRoute {
       routeName: string,

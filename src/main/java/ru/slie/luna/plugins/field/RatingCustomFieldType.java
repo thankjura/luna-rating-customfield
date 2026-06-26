@@ -2,7 +2,9 @@ package ru.slie.luna.plugins.field;
 
 import ru.slie.luna.exception.ValidateException;
 import ru.slie.luna.issue.IssueContext;
+import ru.slie.luna.issue.bulk.BulkActionContext;
 import ru.slie.luna.issue.field.IssueField;
+import ru.slie.luna.issue.field.context.IssueFieldContext;
 import ru.slie.luna.issue.field.options.Option;
 import ru.slie.luna.issue.field.options.OptionsManager;
 import ru.slie.luna.issue.field.type.AbstractFieldType;
@@ -104,5 +106,20 @@ public class RatingCustomFieldType extends AbstractFieldType<Option, Option> {
     @Override
     public List<String> getSupportedFieldSearcherKey() {
         return List.of("ru.slie.luna.issue.field.searcher.impl.OptionsSearcher");
+    }
+
+    @Override
+    public Map<String, Object> getViewParams(IssueField field, IssueFieldContext context, Option value) {
+        return Map.of("options", context.getOptions());
+    }
+
+    @Override
+    public Map<String, Object> getEditParams(IssueField field, IssueFieldContext fieldContext, Option value) {
+        return Map.of("options", fieldContext.getOptions());
+    }
+
+    @Override
+    public Map<String, Object> getEditParams(IssueField field, BulkActionContext actionContext) {
+        return Map.of("options", List.of());
     }
 }

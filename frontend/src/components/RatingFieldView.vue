@@ -2,18 +2,14 @@
 import { computed, type PropType } from "vue";
 import type { Option } from "luna";
 
-defineOptions({
-  name: "RatingFieldView",
-})
-
 const props = defineProps({
   value: Object as PropType<Option<number>>,
-  field: Object as PropType<{ options: Array<Option<number>> }>
-})
+  viewParams: Object as PropType<{ options: Array<Option<number>> }>
+});
 
 const starIndex = computed(() => {
-  if (props.field?.options && props.value) {
-    return props.field.options.findIndex((o: Option<number>) => o.id == props.value?.id);
+  if (props.viewParams?.options && props.value) {
+    return props.viewParams.options.findIndex((o: Option<number>) => o.id == props.value?.id);
   }
 
   return -1;
@@ -23,7 +19,7 @@ const starIndex = computed(() => {
 
 <template>
   <div class="rating-customfield" :title="value?.name">
-    <div class="star" :class="[(idx <= starIndex)? 'icon-star-full': 'icon-star-empty']"  v-for="(opt, idx) in field?.options" :key="opt.id"></div>
+    <div class="star" :class="[(idx <= starIndex)? 'icon-star-full': 'icon-star-empty']"  v-for="(opt, idx) in viewParams?.options" :key="opt.id"></div>
   </div>
 </template>
 
